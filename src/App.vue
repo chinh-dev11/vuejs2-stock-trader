@@ -11,9 +11,14 @@
 
 <script>
 import Header from './components/Header.vue';
+import * as types from './store/types';
+
 export default {
   components: {
     appHeader: Header
+  },
+  created () {
+    this.$store.dispatch(types.INIT_STOCKS);
   }
 };
 </script>

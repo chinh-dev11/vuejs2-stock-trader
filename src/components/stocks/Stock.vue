@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import * as types from '../../store/types';
+
 export default {
   props: {
     stock: {
@@ -51,12 +53,14 @@ export default {
   methods: {
     buyStock () {
       const order = {
-        stockName: this.stock.name,
         stockId: this.stock.id,
         stockPrice: this.stock.price,
         quantity: this.quantity
       };
-      console.log('order: ', order);
+
+      this.$store.dispatch(types.BUY_STOCKS, order);
+
+      this.quantity = 0;
     }
   }
 };

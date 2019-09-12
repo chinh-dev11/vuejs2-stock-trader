@@ -20,16 +20,16 @@ export default {
   computed: {
     /* ...mapGetters([
       types.GET_PORTFOLIO
-    ]) */
-    // KIM - OR can be mapped to a name (eg: stocks)
-    ...mapGetters({
-      stocks: types.GET_PORTFOLIO
-    })
+    ]), */
     /* stocks () {
       // return this.$store.getters[types.GET_PORTFOLIO];
       // KIM - OR using mapGetter
       return this[types.GET_PORTFOLIO]();
     } */
+    // KIM - OR can be mapped to a name (eg: stocks)
+    ...mapGetters({
+      stocks: types.GET_PORTFOLIO
+    })
   }
 };
 </script>

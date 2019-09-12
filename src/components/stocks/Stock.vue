@@ -1,5 +1,5 @@
 <template>
-  <div class="col-sm-6 col-md-4">
+  <div class="col-sm-6">
     <div class="panel panel-success">
       <div class="panel-heading">
         <h3 class="panel-title">
@@ -13,6 +13,7 @@
             type="number"
             class="form-control"
             placeholder="Quantity"
+            :class="{danger: insufficientFunds}"
             />
         </div>
         <div class="pull-right">
@@ -24,10 +25,10 @@
           <button
             class="btn btn-success"
             type="button"
-            :disabled="quantity <= 0 || !Number.isInteger(quantity)"
+            :disabled="insufficientFunds || quantity <= 0 || !Number.isInteger(quantity)"
             @click="buyStock"
             >
-            Buy
+            {{ insufficientFunds ? 'Short Funds' : 'Buy' }}
           </button>
         </div>
       </div>
@@ -50,6 +51,14 @@ export default {
       quantity: 0
     };
   },
+  computed: {
+    funds () {
+      return this.$store.getters[types.GET_FUNDS];
+    },
+    insufficientFunds () {
+      return this.funds < this.quantity * this.stock.price;
+    }
+  },
   methods: {
     buyStock () {
       const order = {
@@ -66,6 +75,8 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
+.danger {
+  border: 1px solid red;
+}
 </style>

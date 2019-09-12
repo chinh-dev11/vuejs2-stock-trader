@@ -1,5 +1,5 @@
 <template>
-  <div class="col-sm-6 col-md-4">
+  <div class="col-sm-6">
     <div class="panel panel-info">
       <div class="panel-heading">
         <h3 class="panel-title">
@@ -13,6 +13,7 @@
             type="number"
             class="form-control"
             placeholder="Quantity"
+            :class="{danger: insufficientQuantity}"
             />
         </div>
         <div class="pull-right">
@@ -24,10 +25,10 @@
           <button
             class="btn btn-danger"
             type="button"
-            :disabled="quantity <= 0 || !Number.isInteger(quantity)"
+            :disabled="insufficientQuantity || quantity <= 0 || !Number.isInteger(quantity)"
             @click="sellStock"
             >
-            Sell
+            {{ insufficientQuantity ? 'Short Stocks' : 'Sell' }}
           </button>
         </div>
       </div>
@@ -50,6 +51,11 @@ export default {
     return {
       quantity: 0
     };
+  },
+  computed: {
+    insufficientQuantity () {
+      return this.stock.quantity < this.quantity;
+    }
   },
   methods: {
     /* ...mapActions([
@@ -79,6 +85,8 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
+.danger {
+  border: 1px solid red;
+}
 </style>

@@ -15,12 +15,17 @@ const mutations = {
   [types.SET_STOCKS]: (state, payload) => {
     state.stocks = payload;
   },
-  [types.RND_STOCKS]: (state) => {}
+  [types.RND_STOCKS]: (state) => {
+    state.stocks.forEach(stock => {
+      // variation between 0.5 and 1.5 of the price
+      stock.price = Math.round(stock.price * (1 + Math.random() - 0.5));
+    });
+  }
 };
 
 const actions = {
   [types.BUY_STOCKS]: ({ commit }, order) => {
-    commit();
+    commit(types.BUY_STOCK_PORTFOLIO, order);
   },
   [types.INIT_STOCKS]: ({ commit }) => {
     commit(types.SET_STOCKS, stocks);

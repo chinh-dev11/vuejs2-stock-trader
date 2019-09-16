@@ -1,5 +1,5 @@
 <template>
-  <div class="col-sm-6 col-md-4">
+  <div class="col-sm-6">
     <div class="panel panel-success">
       <div class="panel-heading">
         <h3 class="panel-title">
@@ -13,6 +13,7 @@
             type="number"
             class="form-control"
             placeholder="Quantity"
+            :class="{danger: insufficientFunds}"
             />
         </div>
         <div class="pull-right">
@@ -24,10 +25,10 @@
           <button
             class="btn btn-success"
             type="button"
-            :disabled="quantity <= 0 || !Number.isInteger(quantity)"
+            :disabled="insufficientFunds || quantity <= 0 || !Number.isInteger(quantity)"
             @click="buyStock"
             >
-            Buy
+            {{ insufficientFunds ? 'Short Funds' : 'Buy' }}
           </button>
         </div>
       </div>
@@ -36,6 +37,8 @@
 </template>
 
 <script>
+import * as types from '../../store/types';
+
 export default {
   props: {
     stock: {
@@ -48,20 +51,32 @@ export default {
       quantity: 0
     };
   },
+  computed: {
+    funds () {
+      return this.$store.getters[types.GET_FUNDS_PORTFOLIO];
+    },
+    insufficientFunds () {
+      return this.funds < this.quantity * this.stock.price;
+    }
+  },
   methods: {
     buyStock () {
       const order = {
-        stockName: this.stock.name,
         stockId: this.stock.id,
         stockPrice: this.stock.price,
         quantity: this.quantity
       };
-      console.log('order: ', order);
+
+      this.$store.dispatch(types.BUY_STOCKS, order);
+
+      this.quantity = 0;
     }
   }
 };
 </script>
 
-<style>
-
+<style scoped>
+.danger {
+  border: 1px solid red;
+}
 </style>

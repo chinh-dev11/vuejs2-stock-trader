@@ -43,7 +43,7 @@ body {
 .fade-enter-active {
   transition: opacity 200ms;
 }
-.fade-leave {}
+/* .fade-leave {} */
 .fade-leave-active {
   transition: opacity 200ms;
   opacity: 0;

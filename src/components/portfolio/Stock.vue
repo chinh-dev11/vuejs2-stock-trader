@@ -59,12 +59,12 @@ export default {
   },
   methods: {
     /* ...mapActions([
-      types.SELLING_STOCK
+      types.SELLING_STOCK_PORTFOLIO
     ]), */
     // KIM - OR can be mapped to a name (eg: 'sellingStock')
     ...mapActions({
       // KIM - CAUTION: not to map to the same name (eg: sellStock) as the method below. It will fail due to a function (sellStock) call loop with the error: Maximum call stck size exceed...
-      sellingStock: types.SELLING_STOCK
+      sellingStock: types.SELLING_STOCK_PORTFOLIO
     }),
     sellStock () {
       const order = {
@@ -73,9 +73,9 @@ export default {
         stockPrice: this.stock.price
       };
 
-      // this.$store.dispatch(types.SELLING_STOCK, order);
+      // this.$store.dispatch(types.SELLING_STOCK_PORTFOLIO, order);
       // KIM - OR using mapActions
-      // this[types.SELLING_STOCK](order);
+      // this[types.SELLING_STOCK_PORTFOLIO](order);
       // KIM - OR calling the mapped name instead
       this.sellingStock(order);
 

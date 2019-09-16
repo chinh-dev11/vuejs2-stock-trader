@@ -80,16 +80,50 @@ export default {
   },
   computed: {
     funds () {
-      return this.$store.getters[types.GET_FUNDS];
+      return this.$store.getters[types.GET_FUNDS_PORTFOLIO];
     }
   },
   methods: {
-    ...mapActions([types.RANDOMIZE_STOCKS]),
+    // ...mapActions([types.RANDOMIZE_STOCKS, 'loadData']),
+    // ...mapActions([types.RANDOMIZE_STOCKS, 'LOAD_DATA']),
+    // KIM - map actions with namespacing
+    ...mapActions(
+      {
+        randomizeStocks: types.RANDOMIZE_STOCKS,
+        // fetchData: types.LOAD_DATA
+        // fetchData: 'LOAD_DATA'
+        fetchData: 'loadData'
+      }
+    ),
     endDay () {
       this[types.RANDOMIZE_STOCKS]();
+      // this.randomizeStocks();
     },
-    saveData () {},
-    loadData () {}
+    saveData () {
+      const data = {
+        funds: this.$store.getters[types.GET_FUNDS_PORTFOLIO],
+        stockPortfolio: this.$store.getters[types.GET_STOCKS_PORTFOLIO],
+        stocks: this.$store.getters[types.GET_STOCKS]
+      };
+
+      this.$http.put('data.json', data);
+      /* .then(
+          response => {
+            console.log('response: ', response);
+          },
+          error => {
+            console.log('error: ', error);
+          }
+        ); */
+    },
+    loadData () {
+      /* KIM -
+      - an action required and not mutation since it's async task
+      - requires using namespacing (mapping actions with a function name - see mapActions above) to prevent an infinite function call loop, in case the action also named 'loadData': [Vue warn]: Error in v-on handler: "RangeError: Maximum call stack size exceeded"
+       */
+      // this.loadData();
+      this.fetchData();
+    }
   }
 };
 </script>

@@ -53,7 +53,7 @@ export default {
   },
   computed: {
     funds () {
-      return this.$store.getters[types.GET_FUNDS];
+      return this.$store.getters[types.GET_FUNDS_PORTFOLIO];
     },
     insufficientFunds () {
       return this.funds < this.quantity * this.stock.price;

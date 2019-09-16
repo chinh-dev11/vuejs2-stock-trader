@@ -19,16 +19,16 @@ export default {
   },
   computed: {
     /* ...mapGetters([
-      types.GET_PORTFOLIO
+      types.GET_STOCKS_PORTFOLIO
     ]), */
     /* stocks () {
-      // return this.$store.getters[types.GET_PORTFOLIO];
+      // return this.$store.getters[types.GET_STOCKS_PORTFOLIO];
       // KIM - OR using mapGetter
-      return this[types.GET_PORTFOLIO]();
+      return this[types.GET_STOCKS_PORTFOLIO]();
     } */
     // KIM - OR can be mapped to a name (eg: stocks)
     ...mapGetters({
-      stocks: types.GET_PORTFOLIO
+      stocks: types.GET_STOCKS_PORTFOLIO
     })
   }
 };

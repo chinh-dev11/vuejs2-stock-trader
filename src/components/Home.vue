@@ -14,7 +14,7 @@ import * as types from '../store/types';
 export default {
   computed: {
     funds () {
-      return this.$store.getters[types.GET_FUNDS];
+      return this.$store.getters[types.GET_FUNDS_PORTFOLIO];
     }
   }
 };

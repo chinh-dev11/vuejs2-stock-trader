@@ -96,8 +96,8 @@ export default {
       }
     ),
     endDay () {
-      this[types.RANDOMIZE_STOCKS]();
-      // this.randomizeStocks();
+      // this[types.RANDOMIZE_STOCKS]();
+      this.randomizeStocks();
     },
     saveData () {
       const data = {

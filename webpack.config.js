@@ -49,10 +49,10 @@ if (process.env.NODE_ENV === 'production') {
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: '"production"'
+        NODE_ENV: '"production"' // KIM - strips out VueJS additional warnings thus reduces file size and prevents giving out some possibly meaningful warnings to users of the app
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
+    new webpack.optimize.UglifyJsPlugin({ // KIM - minified and compressed
       compress: {
         warnings: false
       }

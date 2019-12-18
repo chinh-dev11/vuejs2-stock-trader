@@ -10,7 +10,7 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 
 Vue.http.options = {
-  root: 'https://vuejs2-stock-trader-57490.firebaseio.com/'
+  root: 'https://stock-trader-vue-6bd8c.firebaseio.com/'
 };
 
 Vue.filter('currency', value => {

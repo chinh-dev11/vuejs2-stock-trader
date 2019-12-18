@@ -9,7 +9,7 @@ export const loadData = ({ commit }) => {
 // export const LOAD_DATA = ({ commit }) => {
   Vue.http.get('data.json')
     .then(response => {
-			console.log('TLC: //LOAD_DATA -> response', response);
+			// console.log('TLC: //LOAD_DATA -> response', response);
       return response.json() // KIM - transform response to json
     })
     .then(data => {

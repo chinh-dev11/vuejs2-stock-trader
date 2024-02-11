@@ -1,7 +1,8 @@
 # vuejs2-stock-trader
 Final project of "Vue JS 2 - The Complete Guide" course from Udemy.com
 
-> A Vue.js project using Yarn
+## TODO
+- Reconfigure Webpack since dist/build.js does not work on Vercel.
 
 ## Build Setup
 
